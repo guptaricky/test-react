@@ -1,16 +1,17 @@
+const dataFetchWithLoadingSpinner = (WrappedComponent) => {
+  return function WithLoading(props) {
+    const { isLoading, ...restProps } = props;
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+    return <WrappedComponent {...restProps} />;
+  };
+};
 
-const DataFetchWithLoaderSpinner = (WrappedComponent)=>{
-    return((isLoading, ...props)=>{
-        if(isLoading){
-            return <div>Loading</div>;
-        }
-        return (
-            <WrappedComponent {...props} />
-        );
-    })
-}
+// A sample component to wrap
+const DataFetch = () => {
+  return <div>This is the Data.</div>;
+};
 
-
-const DataFetch = (props) => <div> This is the Data</div>;
-
-export default DataFetchWithLoaderSpinner(DataFetch);
+// Wrapping the component with HOC
+export default dataFetchWithLoadingSpinner(DataFetch);
